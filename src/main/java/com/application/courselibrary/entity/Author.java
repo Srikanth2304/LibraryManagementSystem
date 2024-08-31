@@ -1,10 +1,16 @@
 package com.application.courselibrary.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-        import java.util.HashSet;
+import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "authors")
 public class Author {
@@ -24,40 +30,5 @@ public class Author {
     private Set<Book> books = new HashSet<Book>();
 
 
-    //constructors
 
-    public Author() {
-    }
-
-    public Author(String description, String name) {
-        this.description = description;
-        this.name = name;
-    }
-
-    //Getters & Setters
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
