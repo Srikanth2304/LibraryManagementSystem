@@ -20,9 +20,8 @@ public class Author {
     private String name;
 
     //relations
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "")
-//    Set<Book>books = new HashSet<>();
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books = new HashSet<Book>();
 
 
     //constructors

@@ -2,6 +2,9 @@ package com.application.courselibrary.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "publishers")
 public class Publisher {
@@ -11,6 +14,11 @@ public class Publisher {
 
     @Column(name = "name",length = 50 , nullable = false , unique = false)
     private String name;
+
+    //Relations
+    @ManyToMany(mappedBy = "publishers")
+    private Set<Book>books = new HashSet<Book>();
+
 
     //Constructor
 

@@ -2,6 +2,9 @@ package com.application.courselibrary.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Books")
 public class Book {
@@ -18,11 +21,42 @@ public class Book {
     @Column(name = "description",length = 150 , nullable = false)
     private String description;
 
+    //Relations
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "BookAuthor",
+        joinColumns = {@JoinColumn(name = "BookId")},
+            inverseJoinColumns = {@JoinColumn(name = "AuthorId")}
+    )
+    private Set<Author>authors = new HashSet<Author>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "BookPublisher",
+        joinColumns = {@JoinColumn(name = "BookId")},
+            inverseJoinColumns = {@JoinColumn(name = "PublisherId")}
+    )
+    private Set<Publisher>publishers = new HashSet<Publisher>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "BookCategory",
+            joinColumns = {@JoinColumn(name = "BookId")},
+            inverseJoinColumns = {@JoinColumn(name = "CategoryId")}
+    )
+    private Set<Category>categories = new HashSet<Category>();
+
+
+
     //Constructors
 
     public Book() {
     }
 
+    public Book(String isbn, String name, String description) {
+        this.isbn = isbn;
+        this.name = name;
+        this.description = description;
+    }
+
+    //Getters & Setters
     public int getId() {
         return id;
     }
@@ -55,7 +89,7 @@ public class Book {
         this.description = description;
     }
 
-    //Getters & Setters
+
 
 
 }

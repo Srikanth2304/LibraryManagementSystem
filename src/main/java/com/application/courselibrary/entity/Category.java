@@ -2,6 +2,9 @@ package com.application.courselibrary.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -9,8 +12,12 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "cname",length = 50 , nullable = false ,unique = true)
+    @Column(name = "name",length = 50 , nullable = false ,unique = true)
     private String name;
+
+    //Realtions
+    @ManyToMany(mappedBy = "categories")
+    private Set<Book>books = new HashSet<Book>();
 
     //Constructors
 
