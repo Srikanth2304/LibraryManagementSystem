@@ -17,7 +17,7 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "description",length = 250 , nullable = false)
     private String description;
@@ -26,9 +26,12 @@ public class Author {
     private String name;
 
     //relations
+
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<Book>();
 
-
-
+    public Author(String name, String description) {
+        this.description = description;
+        this.name = name;
+    }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books List</title>
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Add FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+<div th:replace="fragments/headers :: navbar"></div>
+<div class="container mt-3">
+  <h1 class="mb-4">Authors List</h1>
+  <a href="/add-author" class="btn btn-primary mb-3">
+    <i class="fas fa-plus"></i> Add Author
+  </a>
+  <!--    <button  type="button" class="btn btn-primary mb-3"><i class="fas fa-plus"></i> Add Book</button>-->
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Thymeleaf tag for iteration -->
+    <tr th:each="author : ${authors}">
+      <td th:text="${author.id}">#</td>
+      <td th:text="${author.name}">Name</td>
+      <td th:text="${author.description}">Description</td>
+      <td><a th:href="@{/update-author/{id}(id=${author.id})}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+      <td><a th:href="@{/delete-author/{id}(id=${author.id})}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+
+    </tr>
+    </tbody>
+  </table>
+  <!-- Display a message if the list is empty -->
+  <div th:if="${#lists.isEmpty(authors)}">
+    <p>No categories available.</p>
+  </div>
+</div>
+
+<!-- Add Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

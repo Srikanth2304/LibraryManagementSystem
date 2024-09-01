@@ -16,7 +16,7 @@ import java.util.Set;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "name",length = 50 , nullable = false ,unique = true)
     private String name;
@@ -25,4 +25,7 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Set<Book>books = new HashSet<Book>();
 
+    public Category(String name) {
+        this.name = name;
+    }
 }

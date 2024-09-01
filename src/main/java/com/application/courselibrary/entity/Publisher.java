@@ -16,7 +16,7 @@ import java.util.Set;
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "name",length = 50 , nullable = false , unique = false)
     private String name;
@@ -25,6 +25,7 @@ public class Publisher {
     @ManyToMany(mappedBy = "publishers")
     private Set<Book>books = new HashSet<Book>();
 
-
-
+    public Publisher(String name) {
+        this.name = name;
+    }
 }
