@@ -53,9 +53,12 @@ public class AuthorController {
 
     @GetMapping("/delete-author/{id}")
     public String deleteAuthor(@PathVariable Long id , Model model){
-        authorService.removeAuthor(id);
-        model.addAttribute("authors",authorService.getAllAuthors());
-        return "authors";
+        try {
+            authorService.removeAuthor(id);
+        } catch (Exception e) {
+            return "redirect:/authors?error=true";
+        }
+        return "redirect:/authors";
     }
 
     @GetMapping("/add-author")

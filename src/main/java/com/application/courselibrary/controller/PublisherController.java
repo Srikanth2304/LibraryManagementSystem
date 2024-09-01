@@ -54,9 +54,12 @@ public class PublisherController {
 
     @GetMapping("/delete-publisher/{id}")
     public String deletePublisher(@PathVariable Long id, Model model){
-        publisherService.removePublisher(id);
-        model.addAttribute("publishers",publisherService.findAllPublisers());
-        return "publishers";
+        try {
+            publisherService.removePublisher(id);
+        } catch (Exception e) {
+            return "redirect:/publishers?error=true";
+        }
+        return "redirect:/publishers";
     }
 
     @GetMapping("/add-publisher")

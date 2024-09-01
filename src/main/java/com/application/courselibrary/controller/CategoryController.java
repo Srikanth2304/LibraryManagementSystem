@@ -57,11 +57,15 @@ public class CategoryController {
     }
 
     @GetMapping("/delete-category/{id}")
-    public String deleteCategory(@PathVariable Long id , Model model){
-        categoryService.removeCategory(id);
-        model.addAttribute("categories",categoryService.getAllCategories());
-        return "/categories";
+    public String deleteCategory(@PathVariable Long id, Model model) {
+        try {
+            categoryService.removeCategory(id);
+        } catch (Exception e) {
+            return "redirect:/categories?error=true";
+        }
+        return "redirect:/categories";
     }
+
 
     @GetMapping("/add-category")
     public String addCategory(Category category , Model model){
